@@ -1,7 +1,7 @@
 class CheckoutsController < ApplicationController
     def create
-      stripe_secret_key = Rails.application.credentials.stripe(:stripe_secret_key)
-      Stripe.api_key = 'sk_test_51KdvoQDYhAELQbJD9clXJsQ0vO6CxF2kANIJYVcob92JmU9AbPxxHatPmORxdmPHSxMT959vpFy76zULmGxoLScZ00OLcryl0v'
+      stripe_secret_key = Rails.application.credentials.stripe(:STRIPE_SECRET_KEY)
+      Stripe.api_key = process.env.STRIPE_SECRET_KEY
       cart = params[:cart]
       line_items = cart.map do |item|
         product = Product.find(item["id"])

@@ -3,10 +3,10 @@ class WebhooksController <ApplicationController
 
     def stripe
         stripe_secret_key = Rails.application.credentials.stripe(:stripe_secret_key)
-        Stripe.api_key = stripe_secret_key
+        Stripe.api_key = process.env.STRIPE_SECRET_KEY
         payload = request.body.read
         sig_header = request.env['HTTP_STRIPE_SIGNATURE']
-        endpoint_secret = webhook_secret_key
+        endpoint_secret = process.env.WEBHOOK_SECRET_KEY
         event = nil
 
         begin
